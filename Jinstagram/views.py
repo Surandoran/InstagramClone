@@ -1,12 +1,10 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 
+from content.models import Feed
 
-class Sub(APIView):
+
+class Main(APIView):
     def get(self, request):
-        print("겟으로 호출")
-        return render(request, "jinstagram/main.html")
-
-    def post(self, request):
-        print("포스트로 호출")
-        return render(request, "jinstagram/main.html")
+        feed_list = Feed.objects.all()
+        return render(request, 'jinstagram/main.html', context=dict(feed_list=feed_list))
